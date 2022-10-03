@@ -49,13 +49,13 @@ class Stack {
 
   search(k) {
      for (let index = 0; index < this.data.length; index++) {
-       if(this.data[index]===k){
-         
-         return k + " was found in  "+index+" index"
+       if(this.data[index]===k){         
+         return k + " was found in "+index+" index"
        }
      }
     return k + " wasn't found"
   }
+  
   traverse() { }
 
   toString() { }
@@ -73,7 +73,7 @@ s.push(2)
 s.push(1)
 s.push(5)
 console.log('size', s.size())
-console.log(s.search(3))
+console.log(s.search(0))
 
 console.log(s.peek())
 s.pop()
