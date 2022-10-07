@@ -1,7 +1,8 @@
 //
 // ES5
 // to complete
-//
+// 
+//Example of connection with replit
 
 function Queue() {
     this.dataStore = []
