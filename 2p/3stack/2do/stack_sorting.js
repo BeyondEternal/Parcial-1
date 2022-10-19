@@ -51,6 +51,7 @@ function pila(maximo) {
   function peek() {
     return this.Tamaño_Pila[0]
   }
+  let k=0
   let t1=performance.now()
   function ord_pila(x) {
     let p = new pila(x);
@@ -62,10 +63,12 @@ function pila(maximo) {
     while (i < x) {
         while(!s.vacia()){
             p.entrada(s.salida())
+          k++
         }
       r = Math.floor(Math.random() * (x - 1) + 1)    
       while(r>=p.peek() && !p.vacia()){
           s.entrada(p.salida())
+        k++
         }  
         if(r<p.peek() || p.vacia()){
             p.entrada(r)          
