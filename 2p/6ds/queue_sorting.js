@@ -69,7 +69,8 @@ function fila(maximo) {
   function peek() {
     return this.Tamaño_Fila[0]
   }
-   
+   let k=0;
+   let t1=performance.now()
   function ord_fila(x) {
     let p = new fila(x);
     let s = new fila(x);
@@ -100,7 +101,7 @@ function fila(maximo) {
     console.log(p.mostrar())
     console.log(s.mostrar())
   }
-  
+  let t2=performance.now()
     
-  ord_fila(10)
-  console.log("Fin")
+  ord_fila(100)
+  console.log("Tiempo de ejecución: ",t2-t1)

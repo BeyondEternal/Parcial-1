@@ -51,7 +51,7 @@ function pila(maximo) {
   function peek() {
     return this.Tamaño_Pila[0]
   }
-  
+  let t1=performance.now()
   function ord_pila(x) {
     let p = new pila(x);
     let s = new pila(x);
@@ -64,10 +64,10 @@ function pila(maximo) {
             p.entrada(s.salida())
         }
       r = Math.floor(Math.random() * (x - 1) + 1)    
-      while(r<=p.peek() && !p.vacia()){
+      while(r>=p.peek() && !p.vacia()){
           s.entrada(p.salida())
         }  
-        if(r>=p.peek() || p.vacia()){
+        if(r<p.peek() || p.vacia()){
             p.entrada(r)          
           }
         i++
@@ -78,5 +78,6 @@ function pila(maximo) {
     console.log(p.mostrar())
     console.log(s.mostrar())
   }
-  ord_pila(10)
-  console.log("Fin")
+  let t2=performance.now()
+  ord_pila(1000)
+  console.log("Tiempo de ejecución: ",t2-t1)
