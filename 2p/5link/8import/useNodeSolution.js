@@ -60,11 +60,11 @@ function contains(v){
 function getTail(){
   return this.tail.data    
 }
-function insertAfter(position,newNode){
+function insertAfter(newNode,position){
   let c=this.head
   let currNode
   while(c){
-    if(position===c){
+    if(position===c.data){
       currNode = c.next
       c.next = newNode
       newNode.next = currNode
@@ -74,14 +74,14 @@ function insertAfter(position,newNode){
   }
   return false
 }
-function insertBefore(position,newNode){
+function insertBefore(newNode,position){
   let c=this.head
   let prevNode,currNode
   while(c){
     if(position === this.head){
       this.prepend(newNode)
     }
-    else if(position===c){
+    else if(position===c.data){
       currNode = prevNode.next
       prevNode.next = newNode
       newNode.next = currNode
@@ -105,5 +105,5 @@ let n3 = new Node('c')
 let  l = new Linked(n)
 l.append(n1)
 l.append(n2)
-l.insertAfter(n2,n3)
+l.insertBefore(n3,'b')
 l.traverse()
