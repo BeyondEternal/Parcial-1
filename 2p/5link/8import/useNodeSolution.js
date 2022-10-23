@@ -68,10 +68,11 @@ function insertAfter(position,newNode){
       currNode = c.next
       c.next = newNode
       newNode.next = currNode
-
+      return true
     }
     c = c.next
   }
+  return false
 }
 function insertBefore(position,newNode){
   let c=this.head
@@ -84,12 +85,14 @@ function insertBefore(position,newNode){
       currNode = prevNode.next
       prevNode.next = newNode
       newNode.next = currNode
+      return true
     }
     else{
       prevNode = c
     }
     c = c.next
   }
+  return false
 }
 
 
