@@ -6,9 +6,7 @@ for(let i = 0;i<3;i++){
     this.llena = llena
     this.vacia = vacia
     this.entrada = entrada
-    this.entradaSort = entradaSort
     this.salida = salida
-    this.salidaSort = salidaSort
     this.mostrar = mostrar
     this.peek = peek
   }
@@ -29,22 +27,7 @@ for(let i = 0;i<3;i++){
       return this.Tamaño_Fila.shift()
     }
   }
-  function entradaSort(element) {
-    if (this.llena()) {
-      console.log("Tu pila esta llena, debes eliminar elementos")
-    } else {
-      this.Tamaño_Fila.push(element)
-    }
-  }
-  
-  function salidaSort() {
-    if (this.vacia()) {
-      console.log("Tu pila esta vacia, debes introducir elementos")
-    }
-    else {
-      return this.Tamaño_Fila.shift()
-    }
-  }
+
   
   function llena() {
     if (this.Tamaño_Fila.length === this.max)
