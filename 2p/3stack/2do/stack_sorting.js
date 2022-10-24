@@ -78,9 +78,11 @@ for(let i = 0;i<3;i++){
               p.entrada(r)          
             }
           i++
+          k++
       }
       while(!s.vacia()){
           p.entrada(s.salida())
+          k++
       }
       console.log(p.mostrar())
       console.log(s.mostrar())
