@@ -1,54 +1,54 @@
 function Linked(n) {//node
-    this.head = n//node
-    this.tail = n//node
-    this.size = 1
+  this.head = n//node
+  this.tail = n//node
+  this.size = 1
 
-    this.getHead = getHead
-    this.prepend = prepend
-    this.append = append
-    this.traverse = traverse
-    this.contains = contains
-    this.getTail = getTail
+  this.getHead = getHead
+  this.prepend = prepend
+  this.append = append
+  this.traverse = traverse
+  this.contains = contains
+  this.getTail = getTail
 }
 
-function getHead(){return this.head}
+function getHead() { return this.head }
 
-function prepend(n){//new node
-    n.next = this.head
-    this.head=n
-    this.size++
+function prepend(n) {//new node
+  n.next = this.head
+  this.head = n
+  this.size++
 }
 
-function append(n){//new node
-    n.next = null//
-    this.tail.next=n
-    this.tail=n
-    this.size++
+function append(n) {//new node
+  n.next = null//
+  this.tail.next = n
+  this.tail = n
+  this.size++
 }
 
-function traverse(){
-    let c=this.head
-    while(c){//exists
-	//console.log(c.key)
-	console.log(c.data)
-	c=c.next
-    }
-    console.log('\n')
+function traverse() {
+  let c = this.head
+  while (c) {//exists
+    //console.log(c.key)
+    console.log(c.data)
+    c = c.next
+  }
+  console.log('\n')
 }
 
 //
 // exercises
 //
-function contains(v){
-    let c = this.head
-    while(c){
-        if(v==c.data){
-            return true
-        }        
-        c=c.next
+function contains(v) {
+  let c = this.head
+  while (c) {
+    if (v == c.data) {
+      return true
     }
-    return false
+    c = c.next
+  }
+  return false
 }
-function getTail(){
-    return this.tail.data    
+function getTail() {
+  return this.tail
 }
