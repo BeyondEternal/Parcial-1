@@ -1,16 +1,10 @@
-function fibonacci(n){
-    for(let i = 1;i<=n;i++){
-        console.log(fib(i))
-    }
-}
 
-function fib(n) {
+function fibonacci(n) {
     if (n <= 2){
         return 1
-    } 
-        
+    }         
     else{
-        return fib(n-1) + fib(n-2)
+        return fibonacci(n-1) + fibonacci(n-2)
     }
 }
 
@@ -34,7 +28,7 @@ function factorial(n) {
 
 
 console.log("fibonacci");
-fibonacci(5)
+console.log(fibonacci(5))
 console.log("power");
 console.log(power(2,3))
 console.log("factorial");
