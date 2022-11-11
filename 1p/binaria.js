@@ -15,7 +15,7 @@ for (let i = 0; i < 3; i++) {
   let k = 0
   const binarySearch = item => {
     array.sort(up)  //{1}
-    var low = 0,                 //{2}
+    let low = 0,                 //{2}
       high = array.length - 1, //{3}
       mid, element;
     while (low <= high) { //{4}

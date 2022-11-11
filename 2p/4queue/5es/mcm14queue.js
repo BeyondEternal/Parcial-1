@@ -2,8 +2,8 @@
 // ES5
 // to complete
 //
-
-function Queue() {
+export default
+  function Queue() {
     this.dataStore = []
 
     this.enqueue= function(element) {
@@ -30,7 +30,7 @@ function Queue() {
 	return retStr
     }
 
-    this.empty= function() {
+    this.isEmpty= function() {
 	if (this.dataStore.length == 0)
 	    return true	
 	else 
@@ -38,23 +38,10 @@ function Queue() {
 	
     }
 
-    this.full= function() {}
+    this.isFull= function() {}
 }
 
 
 //
 // test program
 //
-let q = new Queue()
-q.enqueue("Meredith")
-q.enqueue("Cynthia")
-q.enqueue("Jennifer")
-
-console.log(q.toString())
-
-console.log("Front of queue: " + q.front())
-console.log("Back of queue: " + q.back())
-
-q.dequeue()
-console.log(q.toString())
-console.log('done')
