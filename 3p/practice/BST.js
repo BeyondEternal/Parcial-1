@@ -120,15 +120,19 @@ export default class BinarySearchTree{
         return this.root;
     }
 
-    search(node,data){
+    search(data){
+        this.searchNode(this.root,data)
+    }
+
+    searchNode(node,data){
         if(node==null){
             return null
         }
         else if(data<node.data){
-            return this.search(node.left,data)
+            return this.searchNode(node.left,data)
         }
         else if(data>node.data){
-            return this.search(node.right,data)
+            return this.searchNode(node.right,data)
         }
         else{
             return node
