@@ -23,3 +23,21 @@ export default class Graph {
         }
     }
 }
+
+let graphUndirected = new Graph(6)
+
+let vertices= [ 'A', 'B', 'C', 'D', 'E', 'F' ];
+for (let i = 0; i < vertices.length; i++) {
+    graphUndirected.addVertex(vertices[i]);
+}
+
+graphUndirected.addEdge('A', 'B');
+graphUndirected.addEdge('A', 'D');
+graphUndirected.addEdge('A', 'E');
+graphUndirected.addEdge('B', 'C');
+graphUndirected.addEdge('D', 'E');
+graphUndirected.addEdge('E', 'F');
+graphUndirected.addEdge('E', 'C');
+graphUndirected.addEdge('C', 'F');
+
+graphUndirected.printGraph()

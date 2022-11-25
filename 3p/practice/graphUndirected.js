@@ -25,41 +25,41 @@ export default class Graph {
         }
     }
  
-    // bfs(startingNode){
+    bfs(startingNode){
          
-    // // create a visited object
-    // let visited = {};
+    // create a visited object
+    let visited = {};
  
-    // // Create an object for queue
-    // let q = new Queue();
+    // Create an object for queue
+    let q = new Queue();
  
-    // // add the starting node to the queue
-    // visited[startingNode] = true;
-    // q.enqueue(startingNode);
+    // add the starting node to the queue
+    visited[startingNode] = true;
+    q.enqueue(startingNode);
  
-    // // loop until queue is empty
-    // while (!q.isEmpty()) {
-    //     // get the element from the queue
-    //     let getQueueElement = q.dequeue();
+    // loop until queue is empty
+    while (!q.isEmpty()) {
+        // get the element from the queue
+        let getQueueElement = q.dequeue();
  
-    //     // passing the current vertex to callback function
-    //     console.log(getQueueElement);
+        // passing the current vertex to callback function
+        console.log(getQueueElement);
  
-    //     // get the adjacent list for current vertex
-    //     let get_List = this.AdjList.get(getQueueElement);
+        // get the adjacent list for current vertex
+        let get_List = this.AdjList.get(getQueueElement);
  
-    //     // loop through the list and add the element to the
-    //     // queue if it is not processed yet
-    //     for (let i in get_List) {
-    //         let neigh = get_List[i];
+        // loop through the list and add the element to the
+        // queue if it is not processed yet
+        for (let i in get_List) {
+            let neigh = get_List[i];
  
-    //         if (!visited[neigh]) {
-    //             visited[neigh] = true;
-    //             q.enqueue(neigh);
-    //         }
-    //     }
-    // }
-    // }
+            if (!visited[neigh]) {
+                visited[neigh] = true;
+                q.enqueue(neigh);
+            }
+        }
+    }
+    }
     dfs(startingNode){
         let visited = {};
  
