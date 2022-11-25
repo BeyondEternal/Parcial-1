@@ -1,209 +1,249 @@
-class MaxHeap {
-    constructor() {
-      this.values = [];
-    }
-    add(element) {
-      this.values.push(element);
-      let index = this.values.length - 1;
-      const current = this.values[index];
+const root = 0;
+const left = i => (i << 1) + 1;
+const right = i => (i + 1) << 1;
+const parent = i => ((i + 1) >> 1) - 1;
+
+class BinaryMaxHeap {
   
-      while (index > 0) {
-        let parentIndex = Math.floor((index - 1) / 2);
-        let parent = this.values[parentIndex];
-  
-        if (parent <= current) {
-          this.values[parentIndex] = current;
-          this.values[index] = parent;
-          index = parentIndex;
-        } else break;
-      }
-    }
-    extractMax() {
-        const max = this.values[0];
-        const end = this.values.pop();
-        this.values[0] = end;
-    
-        let index = 0;
-        const length = this.values.length;
-        const current = this.values[0];
-        while (true) {
-          let leftChildIndex = 2 * index + 1;
-          let rightChildIndex = 2 * index + 2;
-          let leftChild, rightChild;
-          let swap = null;
-    
-          if (leftChildIndex < length) {
-            leftChild = this.values[leftChildIndex];
-            if (leftChild > current) swap = leftChildIndex;
-          }
-          if (rightChildIndex < length) {
-            rightChild = this.values[rightChildIndex];
-            if (
-              (swap === null && rightChild > current) ||
-              (swap !== null && rightChild > leftChild)
-            )
-              swap = rightChildIndex;
-          }
-    
-          if (swap === null) break;
-          this.values[index] = this.values[swap];
-          this.values[swap] = current;
-          index = swap;
-        }
-    
-        return max;
-      }
-      extractMin() {
-        const min = this.values[this.values.length-1];
-        const end = this.values.shift();
-        this.values[0] = end;
-    
-        let index = 0;
-        const length = this.values.length;
-        const current = this.values[0];
-        while (true) {
-          let leftChildIndex = 2 * index + 1;
-          let rightChildIndex = 2 * index + 2;
-          let leftChild, rightChild;
-          let swap = null;
-    
-          if (leftChildIndex < length) {
-            leftChild = this.values[leftChildIndex];
-            if (leftChild > current) swap = leftChildIndex;
-          }
-          if (rightChildIndex < length) {
-            rightChild = this.values[rightChildIndex];
-            if (
-              (swap === null && rightChild > current) ||
-              (swap !== null && rightChild > leftChild)
-            )
-              swap = rightChildIndex;
-          }
-    
-          if (swap === null) break;
-          this.values[index] = this.values[swap];
-          this.values[swap] = current;
-          index = swap;
-        }
-    
-        return min;
-      }
+  constructor() {
+    this._heap = [];
   }
 
-  class MinHeap {
-    constructor() {
-      this.values = [];
-    }
-    add(element) {
-      this.values.unshift(element);
-      let index = this.values.length - 1;
-      const current = this.values[index];
-  
-      while (index > 0) {
-        let parentIndex = Math.floor((index - 1) / 2);
-        let parent = this.values[parentIndex];
-  
-        if (parent >= current) {
-          this.values[parentIndex] = current;
-          this.values[index] = parent;
-          index = parentIndex;
-        } else break;
-      }
-    }
-    extractMax() {
-        const min = this.values[this.values.length-1];
-        const end = this.values.shift();
-        this.values[this.values.length-1] = end;
-    
-        let index = 0;
-        const length = this.values.length;
-        const current = this.values[0];
-        while (true) {
-          let leftChildIndex = 2 * index + 1;
-          let rightChildIndex = 2 * index + 2;
-          let leftChild, rightChild;
-          let swap = null;
-    
-          if (leftChildIndex > length) {
-            leftChild = this.values[leftChildIndex];
-            if (leftChild < current) swap = leftChildIndex;
-          }
-          if (rightChildIndex > length) {
-            rightChild = this.values[rightChildIndex];
-            if (
-              (swap === null && rightChild < current) ||
-              (swap !== null && rightChild < leftChild)
-            )
-              swap = rightChildIndex;
-          }
-    
-          if (swap === null) break;
-          this.values[index] = this.values[swap];
-          this.values[swap] = current;
-          index = swap;
-        }
-    
-        return min;
-      }
+  size() {
+    return this._heap.length;
+  }
 
-      extractMin() {
-        const min = this.values[0];
-        const end = this.values.pop();
-        this.values[this.values.length-1] = end;
-    
-        let index = 0;
-        const length = this.values.length;
-        const current = this.values[0];
-        while (true) {
-          let leftChildIndex = 2 * index + 1;
-          let rightChildIndex = 2 * index + 2;
-          let leftChild, rightChild;
-          let swap = null;
-    
-          if (leftChildIndex > length) {
-            leftChild = this.values[leftChildIndex];
-            if (leftChild < current) swap = leftChildIndex;
-          }
-          if (rightChildIndex > length) {
-            rightChild = this.values[rightChildIndex];
-            if (
-              (swap === null && rightChild < current) ||
-              (swap !== null && rightChild < leftChild)
-            )
-              swap = rightChildIndex;
-          }
-    
-          if (swap === null) break;
-          this.values[index] = this.values[swap];
-          this.values[swap] = current;
-          index = swap;
-        }
-    
-        return min;
-      }
+  peek() {
+    return this._heap[0];
   }
   
+  insert(...values) {
+    values.forEach(value => {
+      this._heap.push(value);
+      this.heapifyUp();
+    })
+  }
 
-  const maxTree = new MaxH();
-maxTree.add(3);
-maxTree.add(4);
-maxTree.add(31);
-maxTree.add(6);
-  console.log(maxTree.values)
-  console.log(maxTree.extractMin());
-  console.log(maxTree.values)
-  console.log(maxTree.extractMax());
-  console.log(maxTree.values)
+  build_heap(values) {
+    values.forEach(value => {
+      this._heap.push(value);
+    });
 
-console.log('Min Heap');
+    let n = values.length;
+    let lastNonLeafNode = (n >> 1) - 1;
 
-  const minTree = new MinH();
-  minTree.add(3);
-  minTree.add(4);
-  minTree.add(31);
-  minTree.add(6);
-  console.log(minTree.values)
-  console.log(minTree.extractMin());
-  console.log(minTree.values)
-  console.log(minTree.extractMax());
-  console.log(minTree.values)
+    for (let i = lastNonLeafNode; i >= 0; i--) {
+      this.heapify(i);
+    }
+  }
+
+  heapify(i) {
+    let node = i;
+    let l = left(node);
+    let r = right(node);
+    let n = this.size();
+    
+    if (l < n && this._heap[node] < this._heap[l]) {
+      node = l;
+    }
+
+    if (r < n && this._heap[node] < this._heap[r]) {
+      node = r;
+    }
+
+    if (node !== i) {
+      this.swap(node, i);
+      this.heapify(node);
+    }
+  }
+
+  extract_max() {
+    let poppedVal = this.peek();
+    let last = this.size() - 1;
+    let top = 0;
+
+    // swap top with last
+    if(last > top)
+      this.swap(top, last);
+
+    // remove last node
+    this._heap.pop();
+
+    this.heapifyDown();
+
+    return poppedVal;
+  }
+
+  swap(i, j) {
+    let temp = this._heap[i];
+    this._heap[i] = this._heap[j];
+    this._heap[j] = temp;
+  }
+
+  heapifyUp() {
+    let node = this.size() - 1;
+
+    while (node > 0 && this._heap[node] > this._heap[parent(node)]) {
+      this.swap(node, parent(node));
+      node = parent(node);
+    }
+  }
+
+  heapifyDown() {
+    let node = root; 
+    let n = this.size();
+    let max;
+
+    while (left(node) < n && this._heap[node] < this._heap[left(node)] ||
+          right(node) < n && this._heap[node] < this._heap[right(node)]) {
+      
+      max = this._heap[left(node)];
+
+      max = this._heap[right(node)] !== undefined ? Math.max(max, this._heap[right(node)]) : max;
+
+      if (this._heap[node] > max) {
+        break;
+      }
+
+      if (max === this._heap[left(node)]) {
+        this.swap(node, left(node));
+        node = left(node);
+      } else {
+        this.swap(node, right(node));
+        node = right(node);
+      }
+    }
+  }
+}
+class BinaryMinHeap {
+  
+  constructor() {
+    this._heap = [];
+  }
+
+  size() {
+    return this._heap.length;
+  }
+
+  peek() {
+    return this._heap[0];
+  }
+
+  build_heap(values) {
+    values.forEach(value => {
+      this._heap.push(value);
+    });
+
+    let n = values.length;
+    let lastNonLeafNode = (n >> 1) - 1;
+
+    for (let i = lastNonLeafNode; i >= 0; i--) {
+      this.heapify(i);
+    }
+  }
+
+  heapify(i) {
+    let node = i;
+    let l = left(node);
+    let r = right(node);
+    let n = this.size();
+    
+    if (l < n && this._heap[node] > this._heap[l]) {
+      node = l;
+    }
+
+    if (r < n && this._heap[node] > this._heap[r]) {
+      node = r;
+    }
+
+    if (node !== i) {
+      this.swap(node, i);
+      this.heapify(node);
+    }
+  }
+  
+  insert(...values) {
+    values.forEach(value => {
+      this._heap.push(value);
+      this.heapifyUp();
+    })
+  }
+
+  extract_min() {
+    let poppedVal = this.peek();
+    let last = this.size() - 1;
+    let top = 0;
+
+    // swap top with last
+    if(last > top)
+      this.swap(top, last);
+
+    // remove last node
+    this._heap.pop();
+
+    this.heapifyDown();
+
+    return poppedVal;
+  }
+
+  swap(i, j) {
+    let temp = this._heap[i];
+    this._heap[i] = this._heap[j];
+    this._heap[j] = temp;
+  }
+
+  heapifyUp() {
+    let node = this.size() - 1;
+
+    while (node > 0 && this._heap[node] < this._heap[parent(node)]) {
+      this.swap(node, parent(node));
+      node = parent(node);
+    }
+  }
+
+  heapifyDown() {
+    let node = root; 
+    let n = this.size();
+    let min;
+
+    while (left(node) < n && this._heap[node] > this._heap[left(node)] ||
+          right(node) < n && this._heap[node] > this._heap[right(node)]) {
+
+      min = this._heap[left(node)];
+
+      min = this._heap[right(node)] !== undefined ? Math.min(min, this._heap[right(node)]) : min;
+
+      if (this._heap[node] < min) {
+        break;
+      }
+
+      if (min === this._heap[left(node)]) {
+        this.swap(node, left(node));
+        node = left(node);
+      } else {
+        this.swap(node, right(node));
+        node = right(node);
+      }
+    }
+  }
+}
+
+let pqlow = new BinaryMinHeap();
+
+let arrlow = [80,70,40,20,10,60,50,30];
+
+for (let i = 0; i < arrlow.length; i++) {
+    pqlow.insert(arrlow[i]);
+}
+
+console.log(pqlow);
+
+let pq = new BinaryMaxHeap();
+
+let arr = [80,70,40,20,10,60,50,30];
+
+for (let i = 0; i < arr.length; i++) {
+    pq.insert(arr[i]);
+}
+
+console.log(pq);

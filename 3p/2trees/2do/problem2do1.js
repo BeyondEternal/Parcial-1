@@ -108,4 +108,4 @@ tree.find(12).right.value;
 
 tree.remove(12);
 
-[...tree.postOrderTraversal()].map(x => x.value);
+console.log([...tree.postOrderTraversal()].map(x => x.value))
