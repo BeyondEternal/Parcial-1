@@ -2,12 +2,12 @@ class Node{
     constructor(data){
         this.data=data
         this.left=null
+        this.middle=null
         this.right=null
-        this.center=null
     }
 }
 
-class TrinaryTree{
+export default class TernaryTree{
     constructor(){
         this.root=null
     }
@@ -23,7 +23,15 @@ class TrinaryTree{
     }
 
     insertNode(node,newNode){
-        if(newNode.data<node.data){
+        if(newNode.data==node.data){
+            if(node.middle==null){
+                node.middle=newNode
+            }
+            else{
+                this.insertNode(node.middle,newNode)
+            }
+        }
+        else if(newNode.data<node.data){
             if(node.left==null){
                 node.left=newNode
             }
@@ -58,24 +66,11 @@ class TrinaryTree{
             return node
         }
         else{
-            if(node.left==null && node.right==null){
-                node = null
+            if(node.middle==null){
+                node=node.middle
                 return node
             }
-            
-            if(node.left==null){
-                node=node.right
-                return node
-            }
-            else if(node.right==null){
-                node=node.left
-                return node
-            }
-
-            let aux = this.findMinNode(node.right)
-            node.data=aux.data
-
-            node.right=this.removeNode(node.right,aux.data)
+            node.middle=this.removeNode(node.middle,key)
             return node
         }
     }
@@ -85,6 +80,7 @@ class TrinaryTree{
         {
             this.inorder(node.left);
             console.log(node.data);
+            this.preorder(node.middle);
             this.inorder(node.right);
         }
     }
@@ -94,6 +90,7 @@ class TrinaryTree{
         {
             console.log(node.data);
             this.preorder(node.left);
+            this.preorder(node.middle);
             this.preorder(node.right);
         }
     }
@@ -102,6 +99,7 @@ class TrinaryTree{
         if(node !== null)
         {
             this.postorder(node.left);
+            this.preorder(node.middle);
             this.postorder(node.right);
             console.log(node.data);
         }
@@ -121,12 +119,12 @@ class TrinaryTree{
     }
 
     search(data){
-        this.searchNode(this.root,data)
+        return this.searchNode(this.root,data)
     }
 
     searchNode(node,data){
         if(node==null){
-            return null
+            return false
         }
         else if(data<node.data){
             return this.searchNode(node.left,data)
@@ -135,7 +133,7 @@ class TrinaryTree{
             return this.searchNode(node.right,data)
         }
         else{
-            return node
+            return true
         }
     }
 }
